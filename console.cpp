@@ -272,11 +272,6 @@ namespace console
 		SetConsoleOutputCP(static_cast<UINT>(cp));
 	}
 
-	void set_mode(DWORD mode)
-	{
-		SetConsoleMode(detail::output_handle, mode);
-	}
-
 	void set_output_mode(DWORD mode)
 	{
 		SetConsoleMode(detail::output_handle, mode);
@@ -505,9 +500,9 @@ namespace console
 		WORD attr{ static_cast<WORD>((csbi.wAttributes & 0xF0) >> 4) };
 		//
 		color_t color{};
-		color.r = (attr & BACKGROUND_RED) ? 255 : 0;
-		color.g = (attr & BACKGROUND_GREEN) ? 255 : 0;
-		color.b = (attr & BACKGROUND_BLUE) ? 255 : 0;
+		color.r = (attr & FOREGROUND_RED) ? 255 : 0;
+		color.g = (attr & FOREGROUND_GREEN) ? 255 : 0;
+		color.b = (attr & FOREGROUND_BLUE) ? 255 : 0;
 		//
 		return { color };
 	}
