@@ -13,4 +13,4 @@ console::set_title("my app");
 console::set_size(120, 30);
 console::set_position(100, 100);
 ```
-I think you get the point
+and on and on I think you get the point
