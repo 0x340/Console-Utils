@@ -5,7 +5,6 @@ Some Console utils that might be helpful to some people, its really easy to use 
 
 **Example**
 ```cpp
-
 #include "console.hpp" // include the header
 
 console::setup(); // must call
@@ -13,7 +12,5 @@ console::setup(); // must call
 console::set_title("my app");
 console::set_size(120, 30);
 console::set_position(100, 100);
-
-// i think you get the point
-
 ```
+I think you get the point
