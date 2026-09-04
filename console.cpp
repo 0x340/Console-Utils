@@ -49,6 +49,9 @@ namespace console
 
 	void set_size(short width, short height)
 	{
+		CONSOLE_SCREEN_BUFFER_INFO csbi{};
+		GetConsoleScreenBufferInfo(detail::output_handle, &csbi);
+		//
 		COORD size{};
 		size.X = width;
 		size.Y = height;
@@ -59,17 +62,37 @@ namespace console
 		rect.Right = static_cast<short>(width - 1);
 		rect.Bottom = static_cast<short>(height - 1);
 		//
-		SetConsoleScreenBufferSize(detail::output_handle, size);
-		SetConsoleWindowInfo(detail::output_handle, TRUE, &rect);
+		if (width < csbi.dwSize.X || height < csbi.dwSize.Y)
+		{
+			SetConsoleWindowInfo(detail::output_handle, TRUE, &rect);
+			SetConsoleScreenBufferSize(detail::output_handle, size);
+		}
+		else
+		{
+			SetConsoleScreenBufferSize(detail::output_handle, size);
+			SetConsoleWindowInfo(detail::output_handle, TRUE, &rect);
+		}
 	}
 
 	void set_window_size(short width, short height)
 	{
+		CONSOLE_SCREEN_BUFFER_INFO csbi{};
+		GetConsoleScreenBufferInfo(detail::output_handle, &csbi);
+		//
 		SMALL_RECT rect{};
 		rect.Left = 0;
 		rect.Top = 0;
 		rect.Right = static_cast<short>(width - 1);
 		rect.Bottom = static_cast<short>(height - 1);
+		//
+		if (width > csbi.dwSize.X || height > csbi.dwSize.Y)
+		{
+			COORD size{};
+			size.X = (width > csbi.dwSize.X) ? width : csbi.dwSize.X;
+			size.Y = (height > csbi.dwSize.Y) ? height : csbi.dwSize.Y;
+			//
+			SetConsoleScreenBufferSize(detail::output_handle, size);
+		}
 		//
 		SetConsoleWindowInfo(detail::output_handle, TRUE, &rect);
 	}
