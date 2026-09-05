@@ -1,9 +1,12 @@
 #pragma once
+
 // <( headers )>
 #include <string>
 #include <cstdint>
+
 // <( windows )>
 #include <Windows.h>
+
 namespace console
 {
 	
@@ -14,6 +17,7 @@ namespace console
 		std::uint8_t g{};
 		std::uint8_t b{};
 	};
+
 	struct rect_t
 	{
 		short left{};
@@ -21,6 +25,7 @@ namespace console
 		short right{};
 		short bottom{};
 	};
+
 	struct font_t
 	{
 		std::wstring face_name{ L"Consolas" };
@@ -28,11 +33,13 @@ namespace console
 		short size_x{ 0 };
 		short size_y{ 16 };
 	};
+
 	struct cursor_info_t
 	{
 		std::uint32_t size{ 25 };
 		bool visible{ true };
 	};
+
 	struct window_info_t
 	{
 		std::string title{};
@@ -45,9 +52,11 @@ namespace console
 		COORD maximum_window_size{};
 		std::uint32_t code_page{};
 	};
+
 	// < setup >
 	void setup();
 	void shutdown();
+
 	// < other shit >
 	void set_size(short width, short height);
 	void set_window_size(short width, short height);
@@ -70,6 +79,7 @@ namespace console
 	void clear(color_t background);
 	color_t get_foreground_color();
 	color_t get_background_color();
+
 	// < colors >
 	void set_foreground_color(std::uint8_t r, std::uint8_t g, std::uint8_t b);
 	void set_background_color(std::uint8_t r, std::uint8_t g, std::uint8_t b);
@@ -78,18 +88,22 @@ namespace console
 	void set_foreground_color(color_t color);
 	void set_background_color(color_t color);
 	void move_window(short x, short y, short width, short height);
+
 	// < center >
 	void center_window();
 	void center_window(short width, short height);
+
 	// < flash >
 	void flash_window();
 	void flash_window(std::uint32_t count, bool invert);
+
 	// < cursor >
 	void show_cursor();
 	void hide_cursor();
 	void set_cursor_size(std::uint32_t size);
 	void set_cursor_visible(bool visible);
 	void set_cursor_position(short x, short y);
+
 	// < getting >
 	COORD get_cursor_position();
 	WORD get_attributes();
@@ -99,4 +113,5 @@ namespace console
 	HANDLE get_output_handle();
 	HANDLE get_input_handle();
 	bool is_fullscreen();
+
 } // console
