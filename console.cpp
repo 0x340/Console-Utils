@@ -1,7 +1,5 @@
 #include "console.hpp"
 
-// <( windows )>
-
 namespace console
 {
 	namespace detail
@@ -586,5 +584,5 @@ namespace console
 	{
 		set_cursor_visible(false);
 	}
-
-} // console
+	
+} // namespace console
